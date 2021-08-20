@@ -1,8 +1,36 @@
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.layout.GridPane?>
+<?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<GridPane fx:controller="sample.Controller"
-          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
-</GridPane>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="scenePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+   <children>
+      <Button layoutX="100.0" layoutY="114.0" mnemonicParsing="false" onAction="#switchSceneNew" prefHeight="50.0" prefWidth="200.0" text="New Spelling quiz">
+         <font>
+            <Font name="Roboto Mono" size="13.0" />
+         </font></Button>
+      <Button layoutX="100.0" layoutY="176.0" mnemonicParsing="false" onAction="#switchSceneNew" prefHeight="50.0" prefWidth="200.0" text="Review Mistakes">
+         <font>
+            <Font name="Roboto Mono" size="13.0" />
+         </font></Button>
+      <Button layoutX="100.0" layoutY="295.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" text="Clear Statistics">
+         <font>
+            <Font name="Roboto Mono" size="13.0" />
+         </font></Button>
+      <Button fx:id="quitButton" layoutX="100.0" layoutY="355.0" mnemonicParsing="false" onAction="#quitApp" prefHeight="50.0" prefWidth="200.0" text="Quit Application">
+         <font>
+            <Font name="Roboto Mono" size="13.0" />
+         </font></Button>
+      <Button layoutX="100.0" layoutY="238.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" text="View Statistics">
+         <font>
+            <Font name="Roboto Mono" size="13.0" />
+         </font></Button>
+      <Text layoutX="50.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome my guy to this amazing speling game quiz" textAlignment="CENTER" wrappingWidth="285.2255859375">
+         <font>
+            <Font name="Roboto Mono" size="22.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>
