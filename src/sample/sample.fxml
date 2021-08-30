@@ -19,7 +19,7 @@
          <font>
             <Font name="Roboto Mono" size="13.0" />
          </font></Button>
-      <Button fx:id="quitButton" layoutX="100.0" layoutY="355.0" mnemonicParsing="false" onAction="#quitApp" prefHeight="50.0" prefWidth="200.0" text="Quit Application">
+      <Button layoutX="100.0" layoutY="355.0" mnemonicParsing="false" onAction="#quitApp" prefHeight="50.0" prefWidth="200.0" text="Quit Application">
          <font>
             <Font name="Roboto Mono" size="13.0" />
          </font></Button>

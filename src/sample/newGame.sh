@@ -52,5 +52,4 @@ spellingGame() {                            #reusable new game function
     echo finished
 }
 touch src/stats/.stats.txt src/stats/.failed.txt src/stats/.faulted.txt
-spellingGame $1
 

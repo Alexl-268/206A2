@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 
 import java.io.*;
 import java.nio.Buffer;
+import java.util.Locale;
 
 public class GameControl {
     private Stage stage;
@@ -33,31 +34,40 @@ public class GameControl {
     @FXML
     private TextField textField;
     String submittedWord;
-    int state = 0;
+    int state = 0;  //before start
+                    //1 waiting for first try
+                    //2waiting for second try
     String word;
 
     @FXML
     public void handleSubmit(javafx.event.ActionEvent event) throws IOException {
         if (state == 0) {
-            state=1;
             submitButton.setText("Submit");
-            updateWord();
-            System.out.println(word);
-            textField.setText("");
-//            String command = "bash src/sample/newGame.sh "+word;
-            String command = "echo hello";
+            String command = "bash src/sample/newGame.sh";
             ProcessBuilder pb = new ProcessBuilder("bash", "-c", command);
             Process process = pb.start();
-            BufferedReader stdout = new BufferedReader(new InputStreamReader(process.getInputStream()));
-            String line = stdout.readLine();
-            System.out.println(line);
-        }else {
-//            submittedWord = textField.getText();
-//            ProcessBuilder pb = new ProcessBuilder("bash", "-c", submittedWord);
-//            Process process = pb.start();
-//            BufferedReader stdout = new BufferedReader(new InputStreamReader(process.getInputStream()));
-//            String line = stdout.readLine();
-//            System.out.println(line);
+            updateWord();
+            speak("spell" + word);
+            state = 1;
+            textField.setText("");
+        } else if (state == 1){
+            if (textField.getText().equalsIgnoreCase(word)){
+                updateWord();
+                speak("correct well done spell      " + word);
+            }else{
+                speak("incorrect please try again      " + word + word);
+                state = 2;
+            }
+            textField.setText("");
+        } else {
+            state=1;
+            updateWord();
+            if (textField.getText().equalsIgnoreCase(word)){
+                speak("correct spell      " + word);
+            }else{
+                speak("incorrect spell      "+ word);
+            }
+            textField.setText("");
         }
     }
 
@@ -68,9 +78,12 @@ public class GameControl {
         BufferedReader stdout = new BufferedReader(new InputStreamReader(process.getInputStream()));
         String line = stdout.readLine();
         word = line;
+        System.out.println(word);
     }
 
-    private void playGame() throws IOException {
-
+    private void speak(String word) throws IOException {
+        String getWord = "echo " + word + " | festival --tts";
+        ProcessBuilder pb = new ProcessBuilder("bash", "-c", getWord);
+        Process process = pb.start();
     }
 }
