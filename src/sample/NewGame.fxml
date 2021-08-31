@@ -8,18 +8,18 @@
 
 <AnchorPane prefHeight="450.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GameControl">
    <children>
-      <Text layoutX="27.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New Spelling Quiz" textAlignment="CENTER" wrappingWidth="345.80322265625">
+      <Text fx:id="label" layoutX="27.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Spelling Quiz" textAlignment="CENTER" wrappingWidth="345.80322265625">
          <font>
             <Font name="Roboto Regular" size="32.0" />
          </font>
       </Text>
       <TextField fx:id="textField" layoutX="75.0" layoutY="176.0" prefHeight="49.0" prefWidth="250.0" promptText="Enter Word" />
-      <Button layoutX="131.0" layoutY="305.0" mnemonicParsing="false" onAction="#switchSceneMain" prefHeight="39.0" prefWidth="138.0" text="Quit" />
+      <Button layoutX="131.0" layoutY="305.0" mnemonicParsing="false" onAction="#switchSceneMain" prefHeight="39.0" prefWidth="138.0" text="Quit"/>
       <Button fx:id="submitButton" layoutX="131.0" layoutY="247.0" mnemonicParsing="false" onAction="#handleSubmit" prefHeight="39.0" prefWidth="138.0" text="Ready" />
-      <Text fx:id="label" layoutX="101.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Press ready to start" textAlignment="CENTER" wrappingWidth="198.80322265625">
-         <font>
-            <Font name="Roboto Regular" size="22.0" />
-         </font>
-      </Text>
+<!--      <Text fx:id="label" layoutX="101.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Press ready to start" textAlignment="CENTER" wrappingWidth="198.80322265625">-->
+<!--         <font>-->
+<!--            <Font name="Roboto Regular" size="22.0" />-->
+<!--         </font>-->
+<!--      </Text>-->
    </children>
 </AnchorPane>

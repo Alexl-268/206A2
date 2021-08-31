@@ -11,7 +11,7 @@
          <font>
             <Font name="Roboto Mono" size="13.0" />
          </font></Button>
-      <Button layoutX="100.0" layoutY="176.0" mnemonicParsing="false" onAction="#switchSceneNew" prefHeight="50.0" prefWidth="200.0" text="Review Mistakes">
+      <Button layoutX="100.0" layoutY="176.0" mnemonicParsing="false" onAction="#switchSceneReview" prefHeight="50.0" prefWidth="200.0" text="Review Mistakes">
          <font>
             <Font name="Roboto Mono" size="13.0" />
          </font></Button>

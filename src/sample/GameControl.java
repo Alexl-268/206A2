@@ -1,5 +1,5 @@
 package sample;
-
+//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
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -12,17 +12,24 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import javax.crypto.spec.PSource;
 import javax.swing.*;
 import java.io.*;
 import java.nio.Buffer;
 import java.util.Locale;
 
-public class GameControl {
+public class GameControl extends Controller{
     private Stage stage;
     private Scene scene;
     private Parent root;
     @FXML
     private AnchorPane scenePane;
+    @FXML
+    private Button submitButton;
+    @FXML
+    private TextField textField;
+    @FXML
+    public Text label;
 
     public void switchSceneMain(javafx.event.ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("sample.fxml"));
@@ -32,32 +39,23 @@ public class GameControl {
         stage.show();
     }
 
-    @FXML
-    private Button submitButton;
-    @FXML
-    private TextField textField;
-    @FXML
-    public Text label;
-
     String submittedWord;
     int state = 0;  //before start
                     //1 waiting for first try
                     //2 waiting for second try
     String word;
-
     @FXML
-    public void handleSubmit(javafx.event.ActionEvent event) throws IOException {
+    public void handleSubmit(javafx.event.ActionEvent event) throws IOException, InterruptedException {
         if (state == 0) {
             submitButton.setText("Submit");
-            updateWord();
-            speak(new String[]{"spell", word});
+            updateWord("", "once");
             state = 1;
             textField.setText("");
         } else if (state == 1){
             if (textField.getText().equalsIgnoreCase(word)){
                 mastered();
             }else{
-                speak(new String[]{"incorrect please try again ", word, word});
+                updateWord("incorrect please try again", "twice");
                 state = 2;
             }
             textField.setText("");
@@ -71,13 +69,30 @@ public class GameControl {
             textField.setText("");
         }
     }
-    private void updateWord() throws IOException {
+    private void updateWord(String speakLine, String times) throws IOException {
         String getWord = "shuf -n1 src/words/popular";
+        if (gametype == 1){
+            getWord = "shuf -n1 src/stats/.failed.txt";
+            File file = new File("c://hello.txt");
+        }
         ProcessBuilder pb = new ProcessBuilder("bash", "-c", getWord);
         Process process = pb.start();
         BufferedReader stdout = new BufferedReader(new InputStreamReader(process.getInputStream()));
-        String line = stdout.readLine();
-        word = line;
+        try {
+            word = stdout.readLine();
+            word.equalsIgnoreCase("null");
+            if (times.equalsIgnoreCase("twice")){
+                speak(new String[]{speakLine,"spell", word, word});
+            }else{
+                speak(new String[]{speakLine,"spell", word});
+            }
+
+        } catch (Exception exception){
+            submitButton.setDisable(true);
+            submitButton.setText("Insufficient words");
+            label.setText("Please play more new games first");
+            speak(new String[]{"Please play more new games first"});
+        }
     }
 
     private void speak(String[] input) throws IOException {
@@ -92,21 +107,18 @@ public class GameControl {
     private void faulted() throws IOException {
         ProcessBuilder pb = new ProcessBuilder("bash", "-c", "bash src/sample/newGame.sh " + word + " 1");
         Process process = pb.start();
-        updateWord();
-        speak(new String[]{"correct spell ", word});
+        updateWord("correct","once");
     }
 
     private void failed() throws IOException {
         ProcessBuilder pb = new ProcessBuilder("bash", "-c", "bash src/sample/newGame.sh " + word + " 2");
         Process process = pb.start();
-        updateWord();
-        speak(new String[]{"incorrect spell ", word});
+        updateWord("incorrect","once");
     }
 
     private void mastered() throws IOException {
         ProcessBuilder pb = new ProcessBuilder("bash", "-c", "bash src/sample/newGame.sh " + word + " 0");
         Process process = pb.start();
-        updateWord();
-        speak(new String[]{"correct well done","spell", word});
+        updateWord("correct well done","once");
     }
 }

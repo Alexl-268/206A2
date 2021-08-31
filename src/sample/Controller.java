@@ -19,8 +19,19 @@ public class Controller {
     private Parent root;
     @FXML
     private AnchorPane scenePane;
+    static int gametype = 0;
 
     public void switchSceneNew(javafx.event.ActionEvent event) throws IOException {
+        gametype = 0;
+        root = FXMLLoader.load(getClass().getResource("NewGame.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void switchSceneReview(javafx.event.ActionEvent event) throws IOException {
+        gametype = 1;
         root = FXMLLoader.load(getClass().getResource("NewGame.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -32,5 +43,9 @@ public class Controller {
     public void quitApp(javafx.event.ActionEvent event) throws IOException {
         stage = (Stage) scenePane.getScene().getWindow();
         stage.close();
+    }
+
+    public int getGametype() {
+        return gametype;
     }
 }
