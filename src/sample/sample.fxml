@@ -15,7 +15,7 @@
          <font>
             <Font name="Roboto Mono" size="13.0" />
          </font></Button>
-      <Button layoutX="100.0" layoutY="295.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" text="Clear Statistics">
+      <Button fx:id="clearButton" layoutX="100.0" layoutY="295.0" mnemonicParsing="false" onAction="#switchClearStats" prefHeight="50.0" prefWidth="200.0" text="Clear Statistics">
          <font>
             <Font name="Roboto Mono" size="13.0" />
          </font></Button>
@@ -23,7 +23,7 @@
          <font>
             <Font name="Roboto Mono" size="13.0" />
          </font></Button>
-      <Button layoutX="100.0" layoutY="238.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" text="View Statistics">
+      <Button fx:id="statsButton" layoutX="100.0" layoutY="238.0" mnemonicParsing="false" onAction="#switchViewStats" prefHeight="50.0" prefWidth="200.0" text="View Statistics">
          <font>
             <Font name="Roboto Mono" size="13.0" />
          </font></Button>
