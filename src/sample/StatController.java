@@ -56,7 +56,13 @@ public class StatController implements Initializable {
             BufferedReader read = new BufferedReader(file);
             String line = read.readLine();
             while (line != null){
-                System.out.println(line);
+                String[] arr = line.split(" ");
+                System.out.print(arr[0]);
+                System.out.print(arr[1]);
+                System.out.print(arr[2]);
+                System.out.print(arr[3]);
+                products.add(new Products(arr[0], Integer.parseInt(arr[1]),Integer.parseInt(arr[2]),Integer.parseInt(arr[3])));
+                line = read.readLine();
             }
 
         } catch (FileNotFoundException e) {

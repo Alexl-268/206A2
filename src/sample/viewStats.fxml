@@ -16,10 +16,10 @@
       </Text>
       <TableView fx:id="statField" layoutX="25.0" layoutY="48.0" prefHeight="342.0" prefWidth="350.0">
         <columns>
-          <TableColumn fx:id="wordCol" editable="false" prefWidth="155.0" text="Word" />
-          <TableColumn fx:id="masterCol" editable="false" prefWidth="65.0" text="Mastered" />
-            <TableColumn fx:id="faultedCol" editable="false" prefWidth="65.0" text="Faulted" />
-            <TableColumn fx:id="failedCol" editable="false" prefWidth="65.0" text="Failed" />
+          <TableColumn fx:id="wordCol" editable="false" prefWidth="154.0" resizable="false" text="Word" />
+          <TableColumn fx:id="masterCol" editable="false" prefWidth="65.0" resizable="false" text="Mastered" />
+            <TableColumn fx:id="faultedCol" editable="false" prefWidth="65.0" resizable="false" text="Faulted" />
+            <TableColumn fx:id="failedCol" editable="false" prefWidth="65.0" resizable="false" text="Failed" />
         </columns>
       </TableView>
       <Button layoutX="100.0" layoutY="396.0" mnemonicParsing="false" onAction="#switchSceneMain" prefHeight="50.0" prefWidth="200.0" text="Return">
