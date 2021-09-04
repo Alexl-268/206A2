@@ -29,7 +29,7 @@ public class Controller {
     @FXML
     private AnchorPane scenePane;
     static int gametype = 0;
-
+    private int sure = 0;
 
     public void switchSceneNew(javafx.event.ActionEvent event) throws IOException {
         gametype = 0;
@@ -50,10 +50,16 @@ public class Controller {
     }
 
     public void switchClearStats(javafx.event.ActionEvent event) throws IOException {
-        ProcessBuilder pb = new ProcessBuilder("bash", "-c", "rm -r src/stats/; mkdir src/stats ;touch src/stats/.stats.txt src/stats/.failed.txt src/stats/.faulted.txt");
-        Process process = pb.start();
-        clearButton.setText("Cleared");
-        clearButton.setDisable(true);
+        if (sure == 0){
+            clearButton.setText("Are you Sure?");
+            sure = 1;
+        }else if (sure == 1){
+            ProcessBuilder pb = new ProcessBuilder("bash", "-c", "rm -r src/stats/; mkdir src/stats ;touch src/stats/.stats.txt src/stats/.failed.txt src/stats/.faulted.txt");
+            Process process = pb.start();
+            clearButton.setText("Cleared");
+            clearButton.setDisable(true);
+            sure = 0;
+        }
     }
 
     public void switchViewStats(javafx.event.ActionEvent event) throws IOException {

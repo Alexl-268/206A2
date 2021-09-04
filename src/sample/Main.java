@@ -16,6 +16,10 @@ public class Main extends Application {
         primaryStage.setTitle("Spelling Game");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
+
+        String setUpFiles = "touch src/stats/.stats.txt src/stats/.failed.txt src/stats/.faulted.txt";
+        ProcessBuilder pb = new ProcessBuilder("bash", "-c", setUpFiles);
+        Process process = pb.start();
     }
 
 

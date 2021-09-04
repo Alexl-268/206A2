@@ -1,5 +1,4 @@
 package sample;
-//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
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -69,16 +68,17 @@ public class GameControl extends Controller{
             textField.setText("");
         }
     }
+
+
     private void updateWord(String speakLine, String times) throws IOException {
 
         try {
             if (times.equalsIgnoreCase("once")){
                 String getWord = "shuf -n1 src/words/popular";
                 if (gametype == 1){
-                    getWord = "shuf -n1 src/stats/.failed.txt";
-                    File file = new File("c://hello.txt");
+                    getWord = "shuf -n1 src/stats/.failed.txt;";
                 }
-
+                Thread.sleep(100);
                 ProcessBuilder pb = new ProcessBuilder("bash", "-c", getWord);
                 Process process = pb.start();
                 BufferedReader stdout = new BufferedReader(new InputStreamReader(process.getInputStream()));
@@ -90,12 +90,12 @@ public class GameControl extends Controller{
             } else{
                 speak(new String[]{speakLine,"spell", word, word});
             }
-
         } catch (Exception exception){
+            speak(new String[]{"no more failed words"});
             submitButton.setDisable(true);
-            submitButton.setText("Insufficient words");
-            label.setText("Please play more new games first");
-            speak(new String[]{"Please play more new games first"});
+            submitButton.setText("You are a winner");
+            label.setText("Congrats! You have passed all words!");
+
         }
     }
 
