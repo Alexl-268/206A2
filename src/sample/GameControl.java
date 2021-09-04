@@ -70,21 +70,25 @@ public class GameControl extends Controller{
         }
     }
     private void updateWord(String speakLine, String times) throws IOException {
-        String getWord = "shuf -n1 src/words/popular";
-        if (gametype == 1){
-            getWord = "shuf -n1 src/stats/.failed.txt";
-            File file = new File("c://hello.txt");
-        }
-        ProcessBuilder pb = new ProcessBuilder("bash", "-c", getWord);
-        Process process = pb.start();
-        BufferedReader stdout = new BufferedReader(new InputStreamReader(process.getInputStream()));
+
         try {
-            word = stdout.readLine();
-            word.equalsIgnoreCase("null");
-            if (times.equalsIgnoreCase("twice")){
-                speak(new String[]{speakLine,"spell", word, word});
-            }else{
+            if (times.equalsIgnoreCase("once")){
+                String getWord = "shuf -n1 src/words/popular";
+                if (gametype == 1){
+                    getWord = "shuf -n1 src/stats/.failed.txt";
+                    File file = new File("c://hello.txt");
+                }
+
+                ProcessBuilder pb = new ProcessBuilder("bash", "-c", getWord);
+                Process process = pb.start();
+                BufferedReader stdout = new BufferedReader(new InputStreamReader(process.getInputStream()));
+
+                word = stdout.readLine();
+                word.equalsIgnoreCase("null");
+
                 speak(new String[]{speakLine,"spell", word});
+            } else{
+                speak(new String[]{speakLine,"spell", word, word});
             }
 
         } catch (Exception exception){

@@ -42,14 +42,12 @@ public class StatController implements Initializable {
         masterCol.setCellValueFactory(new PropertyValueFactory<Products, Integer>("master"));
         faultedCol.setCellValueFactory(new PropertyValueFactory<Products, Integer>("fault"));
         failedCol.setCellValueFactory(new PropertyValueFactory<Products, Integer>("fail"));
-
         statField.setItems(getProduct());
     }
 
     public ObservableList<Products> getProduct(){
         ObservableList<Products> products = FXCollections.observableArrayList();
-//        products.add(new Products("word", 1,1,1));
-
+        products.add(new Products("word", 1,1,1));
 
         try {
             FileReader file = new FileReader(new File("src/stats/.stats.txt"));
@@ -57,16 +55,13 @@ public class StatController implements Initializable {
             String line = read.readLine();
             while (line != null){
                 String[] arr = line.split(" ");
-                System.out.print(arr[0]);
-                System.out.print(arr[1]);
-                System.out.print(arr[2]);
-                System.out.print(arr[3]);
-                products.add(new Products(arr[0], Integer.parseInt(arr[1]),Integer.parseInt(arr[2]),Integer.parseInt(arr[3])));
+//                System.out.println("this is 0 " + arr[0]);
+//                System.out.println("this is 1 " + arr[1]);
+//                System.out.println("this is 2 " + arr[2]);
+//                System.out.println("this is 3 " + arr[arr.length-1]);
+                products.add(new Products(arr[arr.length-1], Integer.parseInt(arr[0]),Integer.parseInt(arr[1]),Integer.parseInt(arr[2])));
                 line = read.readLine();
             }
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
