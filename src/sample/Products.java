@@ -4,6 +4,7 @@ public class Products {
     private String word;
     private int master, fault, fail;
 
+    //this product class stores each word data so that it can be displayed in the table
     public Products(String word, int master, int fault, int fail){
         this.word = word;
         this.master = master;

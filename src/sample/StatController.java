@@ -25,53 +25,50 @@ public class StatController implements Initializable {
     @FXML
     private AnchorPane scenePane;
     @FXML
-    private TableView<Products> statField;
+    private TableView<Products> statField;              //the stats table itself
     @FXML
-    private TableColumn<Products, String> wordCol;
+    private TableColumn<Products, String> wordCol;      //word column
     @FXML
-    private TableColumn<Products, Integer> masterCol;
+    private TableColumn<Products, Integer> masterCol;   //master column
     @FXML
-    private TableColumn<Products, Integer> faultedCol;
+    private TableColumn<Products, Integer> faultedCol;  //faulted column
     @FXML
-    private TableColumn<Products, Integer> failedCol;
+    private TableColumn<Products, Integer> failedCol;   //failed column
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        //initialize the table with all the columns
         wordCol.setCellValueFactory(new PropertyValueFactory<Products, String>("word"));
         masterCol.setCellValueFactory(new PropertyValueFactory<Products, Integer>("master"));
         faultedCol.setCellValueFactory(new PropertyValueFactory<Products, Integer>("fault"));
         failedCol.setCellValueFactory(new PropertyValueFactory<Products, Integer>("fail"));
-        statField.setItems(getProduct());
+        statField.setItems(getProduct());           //get all the lines in stats and display it in the table format
     }
 
     public ObservableList<Products> getProduct(){
+        //use an observable list as the data structure
         ObservableList<Products> products = FXCollections.observableArrayList();
-        products.add(new Products("word", 1,1,1));
 
         try {
             FileReader file = new FileReader(new File("src/stats/.stats.txt"));
-            BufferedReader read = new BufferedReader(file);
+            BufferedReader read = new BufferedReader(file);         //set up buffer reader to read all the lines in the stats file
             String line = read.readLine();
+
             while (line != null){
-                String[] arr = line.split(" ");
-//                System.out.println("this is 0 " + arr[0]);
-//                System.out.println("this is 1 " + arr[1]);
-//                System.out.println("this is 2 " + arr[2]);
-//                System.out.println("this is 3 " + arr[arr.length-1]);
-                products.add(new Products(arr[arr.length-1], Integer.parseInt(arr[0]),Integer.parseInt(arr[1]),Integer.parseInt(arr[2])));
+                String[] arr = line.split(" ");             //splits each line by spaces where the last element is the word, 0th 1st and 2nd is the mastered, faulted and failed
+                products.add(new Products(arr[arr.length-1], Integer.parseInt(arr[0]),Integer.parseInt(arr[1]),Integer.parseInt(arr[2])));      //add the data to the observable list
                 line = read.readLine();
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-
         return products;
-
-
     }
 
+
+    //Switch to main button
     public void switchSceneMain(javafx.event.ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();

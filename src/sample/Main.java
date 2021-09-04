@@ -15,13 +15,13 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle("Spelling Game");
         primaryStage.setScene(new Scene(root));
-        primaryStage.show();
+        primaryStage.show();                                //show the main scene
 
+        //Setting the stats, failed and faulted files
         String setUpFiles = "touch src/stats/.stats.txt src/stats/.failed.txt src/stats/.faulted.txt";
         ProcessBuilder pb = new ProcessBuilder("bash", "-c", setUpFiles);
         Process process = pb.start();
     }
-
 
     public static void main(String[] args) {
         launch(args);

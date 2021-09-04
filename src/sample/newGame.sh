@@ -9,7 +9,7 @@ addStats() {                    #this function renws the stats in .stats.txt fil
         printf "%-10s|%+20s\n"  "0 0 0" "$1">> src/stats/.stats.txt
     fi
 
-    if [ $2 -eq 2 ] ; then
+    if [ $2 -eq 2 ] ; then                            #if the second input is 2 then add to failed word otherwise add to faulted words
         echo "$1" >> src/stats/.failed.txt
     elif [ $2 -eq 1 ]; then
         echo "$1" >> src/stats/.faulted.txt
